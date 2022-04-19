@@ -16,6 +16,7 @@ function FeedbackList() {
             feedback={ feedback.text }
             rating={ feedback.rating }
             id={ feedback.id }
+            item={feedback}
         />
     ))
 

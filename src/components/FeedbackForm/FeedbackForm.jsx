@@ -3,19 +3,26 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
 import FeedbackRating from '../FeedbackRating/FeedbackRating';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import FeedbackButton from './Button';
 import { FeedbackContext } from '../../context/FeedbackContext';
 
 function FeedbackForm() {
-    const { addFeedback } = useContext(FeedbackContext);
+    const { addFeedback, setRatingChange, feedbackEdited, editFeedback } = useContext(FeedbackContext);
     const [rating, setRating] = useState(0);
-    const [textAlert, setAlert] = useState('')
+    const [textAlert, setAlert] = useState('');
     const [text, setText] = useState('');
-    const [btn, setBtnDisabled] = useState(true)
+    const [btn, setBtnDisabled] = useState(true);
+
+    useEffect(()=>{
+        if(feedbackEdited.isEditing === true) {
+            setText(feedbackEdited.feedback.text)
+            setRatingChange(feedbackEdited.feedback.rating);
+            setBtnDisabled(false);
+        }
+    }, [feedbackEdited])
 
     const handleChange= (e)=>{
-        
         if(text==='') {
             setBtnDisabled(true);
             setAlert(null);
@@ -31,13 +38,20 @@ function FeedbackForm() {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        if(rating <= 0) {
-            alert("Please enter a rating")
+
+        if(feedbackEdited.isEditing) {
+            editFeedback(feedbackEdited.feedback.id, text, rating);
+            feedbackEdited.isEditing = false;
         } else {
             addFeedback(rating, text);
+        }
+
+        if(text.trim().length > 10 && rating > 0) {
             setText('');
+            setAlert('');
             setBtnDisabled(true);
-            setRating(0)
+            setRating(0);
+            setRatingChange(0);
         }
     }
 

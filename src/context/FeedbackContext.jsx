@@ -6,11 +6,32 @@ const FeedbackContext = createContext();
 
 
 function FeedbackContextProvider(props) {
-  const [feedbacks, setFeedbacks] = useState(initialFeedbacks)
+  const [feedbacks, setFeedbacks] = useState(initialFeedbacks);
+  //Handle Change in Rating - to enable rating to switch back to 0 in global state after submitting a feedback
+  const [ratingChange, setRatingChange] = useState(0);
+  const [feedbackEdited, setfeedbackEdited] = useState({
+    feedback: {},
+    isEditing: false
+  })
 
   //Add a Feedback
   const addFeedback = (rating, text)=>{
     setFeedbacks([...feedbacks, {id: uuidv4(), text: text, rating: rating}])
+  }
+
+  //Edit a Feedback
+  const editFeedback = (id, text, rating)=>{
+    setFeedbacks(feedbacks.map(feedback=>(
+      feedback.id === id ? {...feedback, text: text, rating: rating} : feedback
+    )))
+  }
+
+  //Settint of Edit state on form prior to edit
+  const changeEditingState = (item)=>{
+    setfeedbackEdited({
+      feedback: item,
+      isEditing: true
+    })
   }
 
   //Delete a Feedback
@@ -21,7 +42,15 @@ function FeedbackContextProvider(props) {
   }
 
   return (
-    <FeedbackContext.Provider value={{feedbacks, setFeedbacks, deleteFeedback, addFeedback}}>
+    <FeedbackContext.Provider value={{feedbacks, 
+                                      setFeedbacks, 
+                                      deleteFeedback, 
+                                      addFeedback, 
+                                      ratingChange, 
+                                      setRatingChange,
+                                      feedbackEdited,
+                                      changeEditingState, 
+                                      editFeedback}}>
         {props.children}
     </FeedbackContext.Provider>
   )

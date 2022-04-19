@@ -9,7 +9,7 @@ import { FeedbackContext } from '../../context/FeedbackContext';
 
 function FeedbackItem(props) {
 
-    const { deleteFeedback } = useContext(FeedbackContext);
+    const { deleteFeedback, changeEditingState } = useContext(FeedbackContext);
 
    const stars = (num)=>{
         let arr = Array.from({length: num});
@@ -36,6 +36,9 @@ function FeedbackItem(props) {
                                 cursor: "pointer"}}
                             onClick={()=>deleteFeedback(props.id)}
                             />
+        <i className="fa-solid fa-pen" 
+           style={{position: "absolute", right: "80px", bottom: "15px", cursor:"pointer"}}
+           onClick={()=> changeEditingState(props.item)}></i>
     <Container maxWidth="md" sx={{ marginTop: "20px", marginLeft: "-30px", width: "150%"}}>
     { stars(props.rating) }
     </Container>
