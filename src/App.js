@@ -1,4 +1,3 @@
-import FeedbackRating from "./components/FeedbackRating/FeedbackRating";
 import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
 import FeedbackStats from "./components/FeedbackStats/FeedbackStats";
 import FeedbackList from "./components/FeedbackList/FeedbackList";
@@ -14,7 +13,6 @@ function App() {
     <Typography variant="h4" align="center" gutterBottom sx={{marginTop: "15px"}}>
         Feedback App with Material and Hook
       </Typography>
-      <FeedbackRating/>
       <FeedbackForm/>
       <FeedbackStats/>
       <FeedbackList/>
