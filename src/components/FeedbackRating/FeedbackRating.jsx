@@ -14,7 +14,7 @@ function FeedbackRating(props) {
     }
 
   return (
-    <Box sx={{margin: "auto"}}>
+    <Box sx={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
     <Typography component="legend" align="center">Please provide your rating</Typography>
     <Rating onChange={ handleChange } name="customized-10" max={10} value={value}/>
     </Box>
