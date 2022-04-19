@@ -13,7 +13,7 @@ function FeedbackStats() {
   return (
     <Container sx={{display: "flex", justifyContent: "center", width: "100%"}}>
     <Alert sx={{marginRight: "80px"}} severity="info">Number of Reviews: { feedbacks.length }</Alert>
-    <Alert severity="warning">Average Rating: { avgRating }</Alert>
+    <Alert severity="warning">Average Rating: { avgRating > 0 ?  avgRating : 0}</Alert>
     </Container>
   )
 }
