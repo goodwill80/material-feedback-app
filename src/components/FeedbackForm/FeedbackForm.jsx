@@ -39,11 +39,15 @@ function FeedbackForm() {
     const handleSubmit = (e)=>{
         e.preventDefault();
 
-        if(feedbackEdited.isEditing) {
+        if(feedbackEdited.isEditing && rating > 0) {
             editFeedback(feedbackEdited.feedback.id, text, rating);
             feedbackEdited.isEditing = false;
         } else {
-            addFeedback(rating, text);
+            if(rating > 0) {
+                addFeedback(rating, text);
+            } else {
+                alert("Please enter a rating");
+            }
         }
 
         if(text.trim().length > 10 && rating > 0) {
