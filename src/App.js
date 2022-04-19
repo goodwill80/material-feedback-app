@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import FeedbackRating from "./components/FeedbackRating/FeedbackRating";
+import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
+import FeedbackStats from "./components/FeedbackStats/FeedbackStats";
+import FeedbackList from "./components/FeedbackList/FeedbackList";
+import { FeedbackContextProvider } from "./context/FeedbackContext";
+import {Typography, CssBaseline, Container } from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+    <FeedbackContextProvider>
+    <CssBaseline />
+    <Container sx={{ display: "flex", flexDirection: "column", justifyContent: "center"}}>
+    <Typography variant="h4" align="center" gutterBottom sx={{marginTop: "15px"}}>
+        Feedback App with Material and Hook
+      </Typography>
+      <FeedbackRating/>
+      <FeedbackForm/>
+      <FeedbackStats/>
+      <FeedbackList/>
+    </Container>
+      </FeedbackContextProvider>
+    </>
   );
 }
 
