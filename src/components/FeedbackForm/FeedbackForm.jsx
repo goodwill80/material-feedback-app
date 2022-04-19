@@ -19,6 +19,7 @@ function FeedbackForm() {
             setText(feedbackEdited.feedback.text)
             setRatingChange(feedbackEdited.feedback.rating);
             setBtnDisabled(false);
+            setRating(feedbackEdited.feedback.rating);
         }
     }, [feedbackEdited])
 
